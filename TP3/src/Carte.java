@@ -55,28 +55,61 @@ public class Carte {
 		return this.boissons;
 	}
 	
-	// V�rifie que les plats et boissons du menu sont bien dans la carte
+	// Vérifie que les plats et boissons du menu sont bien dans la carte
 	private boolean verifMenu(Menu m){
-		
+		boolean retour = true;
+		for (Consommable i : m.getItems()) {
+			retour &= !verifCarte(i);
+		}	
+		return retour;
 	}
 	
-	// V�rifie qu'il n'y a pas d'homonymes dans la carte
+	// Vérifie qu'il n'y a pas d'homonymes dans la carte
 	private boolean verifCarte(Consommable c){
-			
+		ArrayList<Consommable> tab = new ArrayList<Consommable>();
+		tab.addAll(entrées);
+		tab.addAll(platsPrincipaux);
+		tab.addAll(desserts);
+		tab.addAll(boissons);
+		
+		for (Consommable i : tab)
+			if (i.getNom().compareTo(c.getNom()) == 0)
+				return false;
+		
+		return true;				
 	}
 	
 	/* Calcule le prix de la commande. A priori, ce prix est la somme des prix des items 
 	 * SAUF si une partie de ces items constituent un menu; dans ce cas, le tarif menu s'applique pour ces items.
 	 */
 	public int calculerPrixCommande(Commande c){
+		ArrayList<Consommable> commande = c.getItemsCommandés();
+		int indice = 0;	
+		int prix = 0;
+		
+		while ((indice++) < commande.size()) {
+			for (Menu menu : menus) {
+				if 	(commande.containsAll(menu.getItems()) ) {
+					indice = 0;
+					prix += menu.prix;
+					commande.removeAll(menu.getItems());
+					break;
+				}
+			}
+		}
+		for (Consommable i : commande)
+			prix += i.getPrix();
+		
+		return prix;
 		
 	}
 	
 	public void afficherMenu(){
-		System.out.println("Liste des entr�es:" + entrées);
-		System.out.println("Liste des plats principaux:" + platsPrincipaux);
-		System.out.println("Liste des desserts:" + desserts);
-		System.out.println("Liste des boissons:" + boissons);
+		System.out.print("Liste des entrées: ");
+		entrées.forEach((Consommable c) -> {System.out.print(c.getNom());});
+		System.out.println("\nListe des plats principaux:" + platsPrincipaux);
+		System.out.println("\nListe des desserts:" + desserts);
+		System.out.println("\nListe des boissons:" + boissons);
 
 	}
 	

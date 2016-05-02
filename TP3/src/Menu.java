@@ -4,9 +4,15 @@ public class Menu {
 	ArrayList<Consommable> items;
 	int prix; // en cents
 
-	public Menu(int prix, Entrée e, PlatPrincipal p, Dessert d, Boisson b) {
-		
-
+	public Menu(int prix, Entrée e, PlatPrincipal p, Dessert d, Boisson b) throws Exception {
+		this.prix=prix;
+		items = new ArrayList<Consommable>();
+		items.add(e);
+		items.add(p);
+		items.add(d);
+		items.add(b);
+		if (!verifPrixMenu())
+			throw new ExceptionPrixMenuIncorrect (this.toString());
 	}
 	
 	public ArrayList<Consommable> getItems(){
@@ -19,8 +25,8 @@ public class Menu {
 
 	public String toString(){
 		String message = "Menu compose de ";
-		
-
+		for (Consommable i : items) 
+			message += i.toString() + ", ";
 		message += "au prix de " + this.prix/100 + " euros";
 		return message;
 	}

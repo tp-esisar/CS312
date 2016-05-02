@@ -1,9 +1,13 @@
 
-public class Boisson extends Consommable{
-
+public class Boisson implements Consommable{
+	
+	private String nom;
+	private int prix; // en cents d'euros
 	private int volume; // en centilitres
+	
 	public Boisson(String nom, int prix, int volume){
-		super(nom,  prix);
+		this.nom = nom;
+		this.prix = prix;
 		this.volume = volume;
 	}
 	
@@ -13,5 +17,13 @@ public class Boisson extends Consommable{
 	
 	public int getVolume(){
 		return volume;
+	}
+	
+	public String getNom(){
+		return this.nom;
+	}
+	
+	public int getPrix(){
+		return this.prix;
 	}
 }
