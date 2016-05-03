@@ -1,7 +1,7 @@
 
 
-public class EntrÃ©e extends Plat {
-	public EntrÃ©e(String nom, int prix) {
+public class Entrée extends Plat {
+	public Entrée(String nom, int prix) {
 		super(nom, prix);
 	}
 }

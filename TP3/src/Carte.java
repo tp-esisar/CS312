@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 
 public class Carte {
-	private ArrayList<Consommable> entrÃ©es;
+	private ArrayList<Consommable> entrées;
 	private ArrayList<Consommable> platsPrincipaux;
 	private ArrayList<Consommable> desserts;
 	private ArrayList<Consommable> boissons;
@@ -10,15 +10,15 @@ public class Carte {
 	private ArrayList<Menu> menus;
 
 	public Carte() {
-		entrÃ©es = new ArrayList<Consommable>();
+		entrées = new ArrayList<Consommable>();
 		platsPrincipaux = new ArrayList<Consommable>();
 		desserts = new ArrayList<Consommable>();
 		boissons = new ArrayList<Consommable>();	
 		menus = new ArrayList<Menu>();
 	}
 	
-	public void addEntrÃ©e(EntrÃ©e e){
-		if (verifCarte(e)) this.entrÃ©es.add(e);
+	public void addEntrée(Entrée e){
+		if (verifCarte(e)) this.entrées.add(e);
 	}
 	
 	public void addPlatPrincipal(PlatPrincipal p){
@@ -39,8 +39,8 @@ public class Carte {
 		}
 	}
 	
-	public ArrayList<Consommable> getEntrÃ©es(){
-		return this.entrÃ©es;
+	public ArrayList<Consommable> getEntrées(){
+		return this.entrées;
 	}
 	
 	public ArrayList<Consommable> getPlatsPrincipaux(){
@@ -55,7 +55,7 @@ public class Carte {
 		return this.boissons;
 	}
 	
-	// VÃ©rifie que les plats et boissons du menu sont bien dans la carte
+	// Vérifie que les plats et boissons du menu sont bien dans la carte
 	private boolean verifMenu(Menu m){
 		boolean retour = true;
 		for (Consommable i : m.getItems()) {
@@ -64,10 +64,10 @@ public class Carte {
 		return retour;
 	}
 	
-	// VÃ©rifie qu'il n'y a pas d'homonymes dans la carte
+	// Vérifie qu'il n'y a pas d'homonymes dans la carte
 	private boolean verifCarte(Consommable c){
 		ArrayList<Consommable> tab = new ArrayList<Consommable>();
-		tab.addAll(entrÃ©es);
+		tab.addAll(entrées);
 		tab.addAll(platsPrincipaux);
 		tab.addAll(desserts);
 		tab.addAll(boissons);
@@ -83,7 +83,7 @@ public class Carte {
 	 * SAUF si une partie de ces items constituent un menu; dans ce cas, le tarif menu s'applique pour ces items.
 	 */
 	public int calculerPrixCommande(Commande c){
-		ArrayList<Consommable> commande = c.getItemsCommandÃ©s();
+		ArrayList<Consommable> commande = c.getItemsCommandés();
 		int indice = 0;	
 		int prix = 0;
 		
@@ -92,7 +92,8 @@ public class Carte {
 				if 	(commande.containsAll(menu.getItems()) ) {
 					indice = 0;
 					prix += menu.prix;
-					commande.removeAll(menu.getItems());
+					for (Consommable i : menu.getItems())
+						commande.remove(i);
 					break;
 				}
 			}
@@ -105,11 +106,16 @@ public class Carte {
 	}
 	
 	public void afficherMenu(){
-		System.out.print("Liste des entrÃ©es: ");
-		entrÃ©es.forEach((Consommable c) -> {System.out.print(c.getNom());});
-		System.out.println("\nListe des plats principaux:" + platsPrincipaux);
-		System.out.println("\nListe des desserts:" + desserts);
-		System.out.println("\nListe des boissons:" + boissons);
+		System.out.print("Liste des entrées: ");
+		entrées.forEach((Consommable c) -> {System.out.print(c.getNom()+", ");});
+		System.out.print("\nListe des plats principaux: ");
+		platsPrincipaux.forEach((Consommable c) -> {System.out.print(c.getNom()+", ");});
+		System.out.print("\nListe des desserts: ");
+		desserts.forEach((Consommable c) -> {System.out.print(c.getNom()+", ");});
+		System.out.print("\nListe des boissons: ");
+		boissons.forEach((Consommable c) -> {System.out.print(c.getNom()+", ");});
+		System.out.print("\n\nListe des menus: ");
+		menus.forEach((Menu c) -> {System.out.print("\n-"+c.toString());});
 
 	}
 	

@@ -2,18 +2,18 @@
 import java.util.ArrayList;
 
 public class Commande {
-	private ArrayList<Consommable> itemsCommandÃ©s;
+	private ArrayList<Consommable> itemsCommandés;
 	
 	public Commande() {
-		this.itemsCommandÃ©s = new ArrayList<Consommable>();
+		this.itemsCommandés = new ArrayList<Consommable>();
 	}
 	
 	public void addItem(Consommable c){
-		this.itemsCommandÃ©s.add(c);
+		this.itemsCommandés.add(c);
 	}
 	
-	public ArrayList<Consommable> getItemsCommandÃ©s(){
-		return this.itemsCommandÃ©s;
+	public ArrayList<Consommable> getItemsCommandés(){
+		return this.itemsCommandés;
 	}
 
 }
