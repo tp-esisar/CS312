@@ -3,6 +3,6 @@
 	<classpathentry excluding="package2/|package2/" kind="src" path="src"/>
 	<classpathentry kind="src" path="images"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/bruchong/Documents/CS312/Projet/classes"/>
+	<classpathentry kind="lib" path="classes"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
