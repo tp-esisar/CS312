@@ -4,7 +4,7 @@ public class Menu {
 	ArrayList<Consommable> items;
 	int prix; // en cents
 
-	public Menu(int prix, EntrÃ©e e, PlatPrincipal p, Dessert d, Boisson b) throws Exception {
+	public Menu(int prix, Entrée e, PlatPrincipal p, Dessert d, Boisson b) throws Exception {
 		this.prix=prix;
 		items = new ArrayList<Consommable>();
 		items.add(e);
@@ -26,8 +26,8 @@ public class Menu {
 	public String toString(){
 		String message = "Menu compose de ";
 		for (Consommable i : items) 
-			message += i.toString() + ", ";
-		message += "au prix de " + this.prix/100 + " euros";
+			message += i.getNom() + ", ";
+		message += "au prix de " + this.prix + " euros";
 		return message;
 	}
 	

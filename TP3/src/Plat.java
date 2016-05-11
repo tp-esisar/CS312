@@ -10,7 +10,7 @@ public class Plat implements Consommable{
 	}
 	
 	public String getNom(){
-		return this.nom+", ";
+		return this.nom;
 	}
 	
 	public int getPrix(){

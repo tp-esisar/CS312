@@ -14,6 +14,6 @@ public class ExceptionPrixMenuIncorrect extends Exception {
 	}
 
 	public String toString() {
-		return ("Le prix de : " + menu + " est plus chÃ¨re que chaque Ã©lÃ©ment individuellement...");
+		return ("Le prix de : " + menu + " est plus chère que chaque élément individuellement...");
 	}
 }
