@@ -20,14 +20,14 @@ import gates.gate;
 import gates.led;
 
 /**
- * Cette classe représente le conteneur de réalisation de conteneurs logiques
+ * Cette classe reprÃ©sente le conteneur de rÃ©alisation de conteneurs logiques
  * 
  * @author khalfie
  *
  */
 public class LogicGateSimulatorJPanel extends JPanel {
 	/**
-	 * Le type de port logique (sélectionné depuis le toolbox) à positionner
+	 * Le type de port logique (sÃ©lectionnÃ© depuis le toolbox) Ã© positionner
 	 * dans la partie dessin
 	 */
 	private LogicGate selectedLogicGate = LogicGate.NONE;
@@ -38,7 +38,7 @@ public class LogicGateSimulatorJPanel extends JPanel {
 	private JPanel drawingPanel = new JPanel();
 
 	/**
-	 * La boite à outils contenant les ports logiques.
+	 * La boite Ã© outils contenant les ports logiques.
 	 */
 	private JPanel toolbox = new JPanel();
 
@@ -160,10 +160,18 @@ public class LogicGateSimulatorJPanel extends JPanel {
 
 		drawingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
-
-				JOptionPane.showMessageDialog(null, "Implémenter le comportement décrit dans la question 2",
-						"Question 3", JOptionPane.WARNING_MESSAGE);
-				// Question 3
+				if (evt.getButton()==3) {
+					selectedLogicGate = LogicGate.NONE;
+					JFrame frame = (JFrame) SwingUtilities.getRoot(evt.getComponent());
+					frame.setCursor(Cursor.getDefaultCursor());
+				}
+							
+				else if (evt.getButton()==1) {
+					LogicOperatorJPanel logicOperatorJPanel = new LogicOperatorJPanel(null, selectedLogicGate, evt.getX(), evt.getY());
+					drawingPanel.add(logicOperatorJPanel);
+					drawingPanel.validate();
+					drawingPanel.repaint();
+				}
 			}
 		});
 
@@ -171,11 +179,11 @@ public class LogicGateSimulatorJPanel extends JPanel {
 	}
 
 	/**
-	 * Initialise l'interface graphique de simulation de circuits logiques à
-	 * partir d'un circuit déjà sauvegardé
+	 * Initialise l'interface graphique de simulation de circuits logiques Ã 
+	 * partir d'un circuit dÃ©jÃ© sauvegardÃ©
 	 * 
 	 * @param l
-	 *            représente la racine du circuit logique (tout circuit fermé
+	 *            reprÃ©sente la racine du circuit logique (tout circuit fermÃ©
 	 *            doit contenir une seule Led)
 	 */
 	public LogicGateSimulatorJPanel(led l) {
