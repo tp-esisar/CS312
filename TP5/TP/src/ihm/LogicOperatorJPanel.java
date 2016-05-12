@@ -161,14 +161,17 @@ public class LogicOperatorJPanel extends JPanel {
 				// Qu'est-ce qui change pour la variable gate ?
 				// Que faire si on rel�che la souris sans connecter
 				// la sortie qu'on est en train de faire glisser � une entr�e ?
-				java.awt.Component compo = getParent().getParent().findComponentAt(xEnd, yEnd);
-				System.out.println(compo+" xBegin: "+xBegin+" yBegin: "+yBegin+" xEnd: "+xEnd+" yEnd: "+yEnd);
-				if (in1Gate==null && in2Gate == null) {
-					xEnd = xBegin;
-					yEnd = yBegin;
-					getParent().getParent().validate();
-					getParent().getParent().repaint();
+				//java.awt.Component compo = getParent().getParent().findComponentAt(xEnd, yEnd);
+				//System.out.println(compo+" xBegin: "+xBegin+" yBegin: "+yBegin+" xEnd: "+xEnd+" yEnd: "+yEnd);
+				if (in1Gate!=null) {
+					in1Gate.setIn1(gate);
 				}
+				else if(in2Gate!=null) {
+					in2Gate.setIn2(gate);
+				}
+				
+				xEnd = xBegin = 0;
+				yEnd = yBegin = 0;
 				
 			
 			}
@@ -374,6 +377,8 @@ public class LogicOperatorJPanel extends JPanel {
 				gate.setX(e.getXOnScreen()- x0);
 				gate.setY(e.getYOnScreen()- y0);
 				setLocation(gate.getX(), gate.getY());
+				getParent().getParent().validate();
+				getParent().getParent().repaint();
 			}
 		});
 		/*************************
