@@ -148,7 +148,6 @@ public class LogicOperatorJPanel extends JPanel {
 			 ******************************/
 			public void mousePressed(MouseEvent e) {
 				// Le dessin commence d'ici, quelles valeurs donner
-<<<<<<< HEAD
 				// � xBegin, xEnd, yBegin, yEnd ?
 				xBegin = outGate.getX();
 				yBegin = outGate.getY();
@@ -162,33 +161,18 @@ public class LogicOperatorJPanel extends JPanel {
 				java.awt.Component compo = getComponentAt(xEnd, yEnd);
 				System.out.println(compo+" xEnd: "+xEnd+" yEnd: "+yEnd);
 				
-				
-=======
-				// é xBegin, xEnd, yBegin, yEnd ?
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				// Que fair aprés la création d'une connection ?
-				// Qu'est-ce qui change pour la variable gate ?
-				// Que faire si on reléche la souris sans connecter
-				// la sortie qu'on est en train de faire glisser é une entrée ?
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
+			
 			}
 		});
 
 		connectorOUT.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
 				// On est en train de glisser une sortie et on cheche
-<<<<<<< HEAD
-				// une entr�e � connecter
+				// une entrée à connecter
 				
 				xEnd = e.getX() - connectorOUT.getX();
 				yEnd = e.getY() - connectorOUT.getY();
 				
-				
-=======
-				// une entrée é connecter
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 			}
 		});
 		/*************************
@@ -252,11 +236,7 @@ public class LogicOperatorJPanel extends JPanel {
 			}
 			gateImage = new JLabel(new ImageIcon("images/NOT64.png"));
 
-<<<<<<< HEAD
-			// On n'ajouter pas lec connecteur d'entr�e � un bouton, il n'a que
-=======
 			// On n'ajouter pas lec connecteur d'entrée é un bouton, il n'a que
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -326,11 +306,8 @@ public class LogicOperatorJPanel extends JPanel {
 				}
 			});
 
-<<<<<<< HEAD
-			// On n'ajouter pas lec connecteur d'entr�e � un bouton, il n'a que
-=======
+
 			// On n'ajouter pas lec connecteur d'entrée é un bouton, il n'a que
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
