@@ -22,7 +22,7 @@ import gates.LogicGate;
 import gates.gate;
 
 /**
- * Cette classe représente un opérateur logique dans le panneau de dessin
+ * Cette classe reprï¿½sente un opï¿½rateur logique dans le panneau de dessin
  * 
  * @author khalfie
  *
@@ -30,34 +30,33 @@ import gates.gate;
 public class LogicOperatorJPanel extends JPanel {
 
 	/**
-	 * le extrémités d'une connexion en cours de dessin.
+	 * le extrï¿½mitï¿½s d'une connexion en cours de dessin.
 	 */
 	public static int xBegin, yBegin, xEnd, yEnd = 0;
 
 	/**
-	 * le port logique sélectionné depuis la toolbox.
+	 * le port logique sï¿½lectionnï¿½ depuis la toolbox.
 	 */
 	gates.gate gate;
 
 	/**
-	 * les ports logiques reliés par une connexion en cours de dessin.
+	 * les ports logiques reliï¿½s par une connexion en cours de dessin.
 	 */
 	static gates.gate in1Gate, in2Gate, outGate = null;
 
 	/**
-	 * la liste des ports logiques dessinés
+	 * la liste des ports logiques dessinï¿½s
 	 */
 	public static List<gates.gate> lGates = new ArrayList<gates.gate>();
 
 	JComponent gateImage = null;
-
 	/**
-	 * Initialise le port logique à dessiner
+	 * Initialise le port logique ï¿½ dessiner
 	 * 
 	 * @param g
 	 *            port logique correspondant
 	 * @param logicGate
-	 *            le type de port logique à dessiner
+	 *            le type de port logique ï¿½ dessiner
 	 * @param x
 	 *            la position de la porte logique sur le conteneur de dessin
 	 * @param y
@@ -65,7 +64,7 @@ public class LogicOperatorJPanel extends JPanel {
 	 */
 	public LogicOperatorJPanel(gate g, LogicGate logicGate, int x, int y) {
 		this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-
+		
 		JPanel connectorsPanel = new JPanel();
 		connectorsPanel.setLayout(new BoxLayout(connectorsPanel, BoxLayout.PAGE_AXIS));
 
@@ -119,21 +118,32 @@ public class LogicOperatorJPanel extends JPanel {
 			 ******************************/
 			public void mousePressed(MouseEvent e) {
 				// Le dessin commence d'ici, quelles valeurs donner
-				// à xBegin, xEnd, yBegin, yEnd ?
+				// ï¿½ xBegin, xEnd, yBegin, yEnd ?
+				xBegin = outGate.getX();
+				yBegin = outGate.getY();
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				// Que fair après la création d'une connection ?
+				// Que fair aprï¿½s la crï¿½ation d'une connection ?
 				// Qu'est-ce qui change pour la variable gate ?
-				// Que faire si on relâche la souris sans connecter
-				// la sortie qu'on est en train de faire glisser à une entrée ?
+				// Que faire si on relï¿½che la souris sans connecter
+				// la sortie qu'on est en train de faire glisser ï¿½ une entrï¿½e ?
+				java.awt.Component compo = getComponentAt(xEnd, yEnd);
+				System.out.println(compo+" xEnd: "+xEnd+" yEnd: "+yEnd);
+				
+				
 			}
 		});
 
 		connectorOUT.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
 				// On est en train de glisser une sortie et on cheche
-				// une entrée à connecter
+				// une entrï¿½e ï¿½ connecter
+				
+				xEnd = e.getX() - connectorOUT.getX();
+				yEnd = e.getY() - connectorOUT.getY();
+				
+				
 			}
 		});
 		/*************************
@@ -197,7 +207,7 @@ public class LogicOperatorJPanel extends JPanel {
 			}
 			gateImage = new JLabel(new ImageIcon("images/NOT64.png"));
 
-			// On n'ajouter pas lec connecteur d'entrée à un bouton, il n'a que
+			// On n'ajouter pas lec connecteur d'entrï¿½e ï¿½ un bouton, il n'a que
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -267,7 +277,7 @@ public class LogicOperatorJPanel extends JPanel {
 				}
 			});
 
-			// On n'ajouter pas lec connecteur d'entrée à un bouton, il n'a que
+			// On n'ajouter pas lec connecteur d'entrï¿½e ï¿½ un bouton, il n'a que
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
