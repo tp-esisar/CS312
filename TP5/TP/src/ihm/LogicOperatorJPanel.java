@@ -361,8 +361,6 @@ public class LogicOperatorJPanel extends JPanel {
 		 * BEGIN : Question 2 Partie 2
 		 ******************************/
 		this.addMouseListener(new MouseAdapter() {
-
-
 			@Override
 			public void mousePressed(MouseEvent e) {
 				x0 = e.getXOnScreen()-gate.getX();
@@ -375,13 +373,8 @@ public class LogicOperatorJPanel extends JPanel {
 			public void mouseDragged(MouseEvent e) {
 				gate.setX(e.getXOnScreen()- x0);
 				gate.setY(e.getYOnScreen()- y0);
-				
-				
 				setLocation(gate.getX(), gate.getY());
-				System.out.println("drag" + gate.getX() +" / "+gate.getY() );
-				System.out.println("mouse" + e.getYOnScreen() +" / "+e.getYOnScreen() );
 			}
-			
 		});
 		/*************************
 		 * END : Question 2 Partie 2
