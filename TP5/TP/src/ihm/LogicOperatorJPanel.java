@@ -22,42 +22,44 @@ import gates.LogicGate;
 import gates.gate;
 
 /**
- * Cette classe reprÈsente un opÈrateur logique dans le panneau de dessin
+ * Cette classe repr√©sente un op√©rateur logique dans le panneau de dessin
  * 
  * @author khalfie
  *
  */
 public class LogicOperatorJPanel extends JPanel {
 
+	private int x0;
+	private int y0;
 	/**
-	 * le extrÈmitÈs d'une connexion en cours de dessin.
+	 * le extr√©mit√©s d'une connexion en cours de dessin.
 	 */
 	public static int xBegin, yBegin, xEnd, yEnd = 0;
 
 	/**
-	 * le port logique sÈlectionnÈ depuis la toolbox.
+	 * le port logique s√©lectionn√© depuis la toolbox.
 	 */
 	gates.gate gate;
 
 	/**
-	 * les ports logiques reliÈs par une connexion en cours de dessin.
+	 * les ports logiques reli√©s par une connexion en cours de dessin.
 	 */
 	static gates.gate in1Gate, in2Gate, outGate = null;
 
 	/**
-	 * la liste des ports logiques dessinÈs
+	 * la liste des ports logiques dessin√©s
 	 */
 	public static List<gates.gate> lGates = new ArrayList<gates.gate>();
 
 	JComponent gateImage = null;
 
 	/**
-	 * Initialise le port logique ‡ dessiner
+	 * Initialise le port logique √© dessiner
 	 * 
 	 * @param g
 	 *            port logique correspondant
 	 * @param logicGate
-	 *            le type de port logique ‡ dessiner
+	 *            le type de port logique √© dessiner
 	 * @param x
 	 *            la position de la porte logique sur le conteneur de dessin
 	 * @param y
@@ -119,21 +121,21 @@ public class LogicOperatorJPanel extends JPanel {
 			 ******************************/
 			public void mousePressed(MouseEvent e) {
 				// Le dessin commence d'ici, quelles valeurs donner
-				// ‡ xBegin, xEnd, yBegin, yEnd ?
+				// √© xBegin, xEnd, yBegin, yEnd ?
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				// Que fair aprËs la crÈation d'une connection ?
+				// Que fair apr√©s la cr√©ation d'une connection ?
 				// Qu'est-ce qui change pour la variable gate ?
-				// Que faire si on rel‚che la souris sans connecter
-				// la sortie qu'on est en train de faire glisser ‡ une entrÈe ?
+				// Que faire si on rel√©che la souris sans connecter
+				// la sortie qu'on est en train de faire glisser √© une entr√©e ?
 			}
 		});
 
 		connectorOUT.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
 				// On est en train de glisser une sortie et on cheche
-				// une entrÈe ‡ connecter
+				// une entr√©e √© connecter
 			}
 		});
 		/*************************
@@ -197,7 +199,7 @@ public class LogicOperatorJPanel extends JPanel {
 			}
 			gateImage = new JLabel(new ImageIcon("images/NOT64.png"));
 
-			// On n'ajouter pas lec connecteur d'entrÈe ‡ un bouton, il n'a que
+			// On n'ajouter pas lec connecteur d'entr√©e √© un bouton, il n'a que
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -267,7 +269,7 @@ public class LogicOperatorJPanel extends JPanel {
 				}
 			});
 
-			// On n'ajouter pas lec connecteur d'entrÈe ‡ un bouton, il n'a que
+			// On n'ajouter pas lec connecteur d'entr√©e √© un bouton, il n'a que
 			// le connecteur de sortie.
 			// connectorsPanel.add(connectorIN1);
 			// connectorsPanel.add(Box.createRigidArea(new Dimension(0, 6)));
@@ -306,28 +308,38 @@ public class LogicOperatorJPanel extends JPanel {
 			lGates.add(gate);
 		}
 
+	
 		/*************************
 		 * BEGIN : Question 2 Partie 2
 		 ******************************/
 		this.addMouseListener(new MouseAdapter() {
+
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-
+				x0 = e.getXOnScreen()-gate.getX();
+				y0 = e.getYOnScreen()-gate.getY();
 			}
 		});
 
 		this.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-
+				gate.setX(e.getXOnScreen()- x0);
+				gate.setY(e.getYOnScreen()- y0);
+				
+				
+				setLocation(gate.getX(), gate.getY());
+				System.out.println("drag" + gate.getX() +" / "+gate.getY() );
+				System.out.println("mouse" + e.getYOnScreen() +" / "+e.getYOnScreen() );
 			}
+			
 		});
 		/*************************
 		 * END : Question 2 Partie 2
 		 ****************************/
 
 		this.setBounds(x, y, this.getPreferredSize().width, this.getPreferredSize().height);
-
 		this.validate();
 		this.repaint();
 	}
