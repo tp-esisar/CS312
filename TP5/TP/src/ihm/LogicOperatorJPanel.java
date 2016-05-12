@@ -1,7 +1,11 @@
 package ihm;
 
+import gates.LogicGate;
+import gates.gate;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,9 +21,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-
-import gates.LogicGate;
-import gates.gate;
 
 /**
 <<<<<<< HEAD
@@ -149,8 +150,10 @@ public class LogicOperatorJPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				// Le dessin commence d'ici, quelles valeurs donner
 				// � xBegin, xEnd, yBegin, yEnd ?
-				xBegin = outGate.getX();
-				yBegin = outGate.getY();
+				xBegin = xEnd = getParent().getParent().getMousePosition().x;
+				yBegin = yEnd = getParent().getParent().getMousePosition().y;
+				getParent().getParent().validate();
+				getParent().getParent().repaint();
 			}
 
 			public void mouseReleased(MouseEvent e) {
@@ -158,8 +161,14 @@ public class LogicOperatorJPanel extends JPanel {
 				// Qu'est-ce qui change pour la variable gate ?
 				// Que faire si on rel�che la souris sans connecter
 				// la sortie qu'on est en train de faire glisser � une entr�e ?
-				java.awt.Component compo = getComponentAt(xEnd, yEnd);
-				System.out.println(compo+" xEnd: "+xEnd+" yEnd: "+yEnd);
+				java.awt.Component compo = getParent().getParent().findComponentAt(xEnd, yEnd);
+				System.out.println(compo+" xBegin: "+xBegin+" yBegin: "+yBegin+" xEnd: "+xEnd+" yEnd: "+yEnd);
+				if (in1Gate==null && in2Gate == null) {
+					xEnd = xBegin;
+					yEnd = yBegin;
+					getParent().getParent().validate();
+					getParent().getParent().repaint();
+				}
 				
 			
 			}
@@ -169,10 +178,11 @@ public class LogicOperatorJPanel extends JPanel {
 			public void mouseDragged(MouseEvent e) {
 				// On est en train de glisser une sortie et on cheche
 				// une entrée à connecter
+				xEnd = getParent().getParent().getMousePosition().x;
+				yEnd = getParent().getParent().getMousePosition().y;
 				
-				xEnd = e.getX() - connectorOUT.getX();
-				yEnd = e.getY() - connectorOUT.getY();
-				
+				getParent().getParent().validate();
+				getParent().getParent().repaint();
 			}
 		});
 		/*************************
