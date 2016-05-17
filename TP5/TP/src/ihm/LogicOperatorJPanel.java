@@ -23,11 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 /**
-<<<<<<< HEAD
- * Cette classe repr�sente un op�rateur logique dans le panneau de dessin
-=======
  * Cette classe représente un opérateur logique dans le panneau de dessin
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
  * 
  * @author khalfie
  *
@@ -37,57 +33,33 @@ public class LogicOperatorJPanel extends JPanel {
 	private int x0;
 	private int y0;
 	/**
-<<<<<<< HEAD
-	 * le extr�mit�s d'une connexion en cours de dessin.
-=======
 	 * le extrémités d'une connexion en cours de dessin.
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 */
 	public static int xBegin, yBegin, xEnd, yEnd = 0;
 
 	/**
-<<<<<<< HEAD
-	 * le port logique s�lectionn� depuis la toolbox.
-=======
 	 * le port logique sélectionné depuis la toolbox.
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 */
 	gates.gate gate;
 
 	/**
-<<<<<<< HEAD
-	 * les ports logiques reli�s par une connexion en cours de dessin.
-=======
 	 * les ports logiques reliés par une connexion en cours de dessin.
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 */
 	static gates.gate in1Gate, in2Gate, outGate = null;
 
 	/**
-<<<<<<< HEAD
-	 * la liste des ports logiques dessin�s
-=======
 	 * la liste des ports logiques dessinés
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 */
 	public static List<gates.gate> lGates = new ArrayList<gates.gate>();
 
 	JComponent gateImage = null;
 	/**
-<<<<<<< HEAD
-	 * Initialise le port logique � dessiner
-=======
 	 * Initialise le port logique é dessiner
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 * 
 	 * @param g
 	 *            port logique correspondant
 	 * @param logicGate
-<<<<<<< HEAD
-	 *            le type de port logique � dessiner
-=======
 	 *            le type de port logique é dessiner
->>>>>>> 0a78b9ca8f17c11e2cf547cf44e56725bc8991b6
 	 * @param x
 	 *            la position de la porte logique sur le conteneur de dessin
 	 * @param y
