@@ -145,6 +145,9 @@ public class LogicOperatorJPanel extends JPanel {
 				xEnd = xBegin = 0;
 				yEnd = yBegin = 0;
 				
+				getParent().getParent().validate();
+				getParent().getParent().repaint();
+				
 			
 			}
 		});
@@ -363,6 +366,7 @@ public class LogicOperatorJPanel extends JPanel {
 	}
 
 	public void SimulateCircuit(boolean simulatedValue) {
+		System.out.println(simulatedValue);
 		((JToggleButton) gateImage).setSelected(simulatedValue);
 	}
 }

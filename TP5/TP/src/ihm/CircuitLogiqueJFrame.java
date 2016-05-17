@@ -33,7 +33,7 @@ import gates.or;
 import gates.xor;
 
 /**
- * Cette classe représente la fenêtre principale de l'interface graphique
+ * Cette classe reprï¿½sente la fenï¿½tre principale de l'interface graphique
  * 
  * Elle contient le menu et le conteneur de dessin
  * 
@@ -53,7 +53,7 @@ public class CircuitLogiqueJFrame extends JFrame {
 	private LogicGateSimulatorJPanel lgsPanel = new LogicGateSimulatorJPanel();
 
 	/**
-	 * Initialise la fenêtre principale
+	 * Initialise la fenï¿½tre principale
 	 */
 	public CircuitLogiqueJFrame() {
 
@@ -72,7 +72,7 @@ public class CircuitLogiqueJFrame extends JFrame {
 	}
 
 	/**
-	 * Création du toolbar
+	 * Crï¿½ation du toolbar
 	 */
 	private void createToolBar() {
 
@@ -90,11 +90,11 @@ public class CircuitLogiqueJFrame extends JFrame {
 		JButton buttonValidate = new JButton(iconValidate);
 		JButton buttonSimulate = new JButton(iconSimulate);
 
-		buttonNew.setToolTipText("Créer un nouveau circuit logique");
+		buttonNew.setToolTipText("Crï¿½er un nouveau circuit logique");
 		buttonLoad.setToolTipText("Charger un fichier (*.boole) contenant un circuit logique");
 		buttonSave.setToolTipText("Sauvegarder un circuit logique dans un fichier (*.boole)");
-		buttonValidate.setToolTipText("Vérifier si un circuit logique est fermé");
-		buttonSimulate.setToolTipText("Simuler le résultat d'un circuit logique");
+		buttonValidate.setToolTipText("Vï¿½rifier si un circuit logique est fermï¿½");
+		buttonSimulate.setToolTipText("Simuler le rï¿½sultat d'un circuit logique");
 
 		toolbar.add(buttonNew);
 		toolbar.add(buttonLoad);
@@ -144,12 +144,12 @@ public class CircuitLogiqueJFrame extends JFrame {
 				for (gate g : LogicOperatorJPanel.lGates) {
 					if (g instanceof gates.led) {
 						if (((led) g).ValiderCircuitFerme()) {
-							JOptionPane.showMessageDialog(null, "Le circcuit est bien fermé",
-									"InfoBox: " + "Circuit Fermé", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Le circcuit est bien fermï¿½",
+									"InfoBox: " + "Circuit Fermï¿½", JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
-									"Le circcuit n'est pas fermé. Merci de connecter toutes les entrées sorties",
-									"InfoBox: " + "Circuit Non Fermé", JOptionPane.WARNING_MESSAGE);
+									"Le circcuit n'est pas fermï¿½. Merci de connecter toutes les entrï¿½es sorties",
+									"InfoBox: " + "Circuit Non Fermï¿½", JOptionPane.WARNING_MESSAGE);
 						}
 						return;
 					}
