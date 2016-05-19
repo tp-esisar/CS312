@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class not extends gate {
+	
+	public not() {
+		logicGate=LogicGate.NOT;
+	}
 
 	public boolean ValiderCircuitFerme() {
 		if (in1==null || !in1.ValiderCircuitFerme())

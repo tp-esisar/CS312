@@ -7,6 +7,10 @@ public class button extends gate {
 
 	boolean value = false;
 	
+	public button() {
+		logicGate=LogicGate.BUTTON;
+	}
+	
 	public boolean ValiderCircuitFerme() {
 		return true;
 	}

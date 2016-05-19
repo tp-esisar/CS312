@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class or extends gate {
+	
+	public or() {
+		logicGate=LogicGate.OR;
+	}
 
 	public boolean ValiderCircuitFerme() {
 		if (in1==null || in2==null || !in1.ValiderCircuitFerme() || !in2.ValiderCircuitFerme())

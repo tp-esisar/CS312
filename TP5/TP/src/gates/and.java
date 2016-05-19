@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class and extends gate{
+	
+	public and() {
+		logicGate=LogicGate.AND;
+	}
 
 	public boolean ValiderCircuitFerme() {
 		if (in1==null || in2==null || !in1.ValiderCircuitFerme() || !in2.ValiderCircuitFerme())
@@ -13,7 +17,7 @@ public class and extends gate{
 	}
 
 	public boolean Process() {
-		if(ValiderCircuitFerme() && in1.Process() && in2.Process())
+		if(in1.Process() && in2.Process())
 			return true;
 		else
 			return false;

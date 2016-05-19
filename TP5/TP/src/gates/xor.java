@@ -5,6 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class xor extends gate {
 	
+	public xor() {
+		logicGate=LogicGate.XOR;
+	}
+	
 	public boolean ValiderCircuitFerme() {
 		if (in1==null || in2==null || !in1.ValiderCircuitFerme() || !in2.ValiderCircuitFerme())
 			return false;

@@ -4,6 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class nand extends gate {
+	
+	public nand() {
+		logicGate=LogicGate.NAND;
+	}
 
 	public boolean ValiderCircuitFerme() {
 		if (in1==null || in2==null || !in1.ValiderCircuitFerme() || !in2.ValiderCircuitFerme())
