@@ -1,6 +1,7 @@
 package ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -19,14 +20,14 @@ import gates.gate;
 import gates.led;
 
 /**
- * Cette classe reprÈsente le conteneur de rÈalisation de conteneurs logiques
+ * Cette classe repr√©sente le conteneur de r√©alisation de conteneurs logiques
  * 
  * @author khalfie
  *
  */
 public class LogicGateSimulatorJPanel extends JPanel {
 	/**
-	 * Le type de port logique (sÈlectionnÈ depuis le toolbox) ‡ positionner
+	 * Le type de port logique (s√©lectionn√© depuis le toolbox) √© positionner
 	 * dans la partie dessin
 	 */
 	private LogicGate selectedLogicGate = LogicGate.NONE;
@@ -37,7 +38,7 @@ public class LogicGateSimulatorJPanel extends JPanel {
 	private JPanel drawingPanel = new JPanel();
 
 	/**
-	 * La boite ‡ outils contenant les ports logiques.
+	 * La boite √© outils contenant les ports logiques.
 	 */
 	private JPanel toolbox = new JPanel();
 
@@ -177,9 +178,11 @@ public class LogicGateSimulatorJPanel extends JPanel {
 				selectedLogicGate = LogicGate.NONE;
 				JFrame frame = (JFrame) SwingUtilities.getRoot(evt.getComponent());
 				frame.setCursor(Cursor.getDefaultCursor());
-
-				drawingPanel.validate();
-				drawingPanel.repaint();
+				//Youhou !
+				
+				
+				drawingPanel.getParent().validate();
+				drawingPanel.getParent().repaint();
 			}
 		});
 
@@ -187,11 +190,11 @@ public class LogicGateSimulatorJPanel extends JPanel {
 	}
 
 	/**
-	 * Initialise l'interface graphique de simulation de circuits logiques ‡
-	 * partir d'un circuit dÈj‡ sauvegardÈ
+	 * Initialise l'interface graphique de simulation de circuits logiques √†
+	 * partir d'un circuit d√©j√© sauvegard√©
 	 * 
 	 * @param l
-	 *            reprÈsente la racine du circuit logique (tout circuit fermÈ
+	 *            repr√©sente la racine du circuit logique (tout circuit ferm√©
 	 *            doit contenir une seule Led)
 	 */
 	public LogicGateSimulatorJPanel(led l) {

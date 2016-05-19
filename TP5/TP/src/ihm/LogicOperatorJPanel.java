@@ -2,10 +2,11 @@ package ihm;
 
 import gates.LogicGate;
 import gates.gate;
+import gates.led;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,8 +20,11 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JToggleButton;
+import javax.swing.SwingUtilities;
 
 /**
  * Cette classe représente un opérateur logique dans le panneau de dessin
@@ -120,8 +124,6 @@ public class LogicOperatorJPanel extends JPanel {
 			 * BEGIN : Question 3 Partie 2
 			 ******************************/
 			public void mousePressed(MouseEvent e) {
-				// Le dessin commence d'ici, quelles valeurs donner
-				// � xBegin, xEnd, yBegin, yEnd ?
 				xBegin = xEnd = getParent().getParent().getMousePosition().x;
 				yBegin = yEnd = getParent().getParent().getMousePosition().y;
 				getParent().getParent().validate();
@@ -129,24 +131,34 @@ public class LogicOperatorJPanel extends JPanel {
 			}
 
 			public void mouseReleased(MouseEvent e) {
-				// Que fair apr�s la cr�ation d'une connection ?
-				// Qu'est-ce qui change pour la variable gate ?
-				// Que faire si on rel�che la souris sans connecter
-				// la sortie qu'on est en train de faire glisser � une entr�e ?
-				//java.awt.Component compo = getParent().getParent().findComponentAt(xEnd, yEnd);
-				//System.out.println(compo+" xBegin: "+xBegin+" yBegin: "+yBegin+" xEnd: "+xEnd+" yEnd: "+yEnd);
-				if (in1Gate!=null) {
+				if (in1Gate!=null)
 					in1Gate.setIn1(gate);
-				}
-				else if(in2Gate!=null) {
+				else if(in2Gate!=null)
 					in2Gate.setIn2(gate);
-				}
 				
 				xEnd = xBegin = 0;
 				yEnd = yBegin = 0;
 				
+				for (gate g : LogicOperatorJPanel.lGates) {
+					if (g instanceof gates.led) {
+						if (((led) g).ValiderCircuitFerme()) {
+							boolean simulatedValue = ((led) g).Process();
+							JPanel drawingPanel = (JPanel) getParent().getParent().getComponent(1);
+
+							for (Component cp : drawingPanel.getComponents()) {
+								LogicOperatorJPanel operateur = (LogicOperatorJPanel) cp;
+								if (operateur.gate.logicGate == LogicGate.LED) {
+									operateur.SimulateCircuit(simulatedValue);
+									break;
+								}
+							}
+						}
+					}
+				}
+				
 				getParent().getParent().validate();
 				getParent().getParent().repaint();
+				
 				
 			
 			}
@@ -154,8 +166,6 @@ public class LogicOperatorJPanel extends JPanel {
 
 		connectorOUT.addMouseMotionListener(new MouseMotionAdapter() {
 			public void mouseDragged(MouseEvent e) {
-				// On est en train de glisser une sortie et on cheche
-				// une entrée à connecter
 				xEnd = getParent().getParent().getMousePosition().x;
 				yEnd = getParent().getParent().getMousePosition().y;
 				
@@ -164,7 +174,7 @@ public class LogicOperatorJPanel extends JPanel {
 			}
 		});
 		/*************************
-		 * BEGIN : Question 3 Partie 2
+		 * END : Question 3 Partie 2
 		 ******************************/
 		switch (logicGate) {
 		case AND:
@@ -291,6 +301,22 @@ public class LogicOperatorJPanel extends JPanel {
 					} else {
 						((gates.button) gate).setValue(false);
 					}
+					for (gate g : LogicOperatorJPanel.lGates) {
+						if (g instanceof gates.led) {
+							if (((led) g).ValiderCircuitFerme()) {
+								boolean simulatedValue = ((led) g).Process();
+								JPanel drawingPanel = (JPanel) getParent().getParent().getComponent(1);
+
+								for (Component cp : drawingPanel.getComponents()) {
+									LogicOperatorJPanel operateur = (LogicOperatorJPanel) cp;
+									if (operateur.gate.logicGate == LogicGate.LED) {
+										operateur.SimulateCircuit(simulatedValue);
+										break;
+									}
+								}
+							}
+						}
+					}
 				}
 			});
 
@@ -344,6 +370,35 @@ public class LogicOperatorJPanel extends JPanel {
 				x0 = e.getXOnScreen()-gate.getX();
 				y0 = e.getYOnScreen()-gate.getY();
 			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (SwingUtilities.isRightMouseButton(e)) {
+					JPopupMenu popup = new JPopupMenu();
+					JMenuItem menuItem;
+					menuItem = new JMenuItem("Supprimer", new ImageIcon(
+							"images/remove.png"));
+					menuItem.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							java.awt.Container JPanel = getParent().getParent();
+							getParent().remove(LogicOperatorJPanel.this);
+							
+							for (gate g : LogicOperatorJPanel.lGates) {
+								if (g.getIn1() == gate)
+									g.setIn1(null);
+								else if (g.getIn2() == gate)
+									g.setIn2(null);
+							}
+							LogicOperatorJPanel.lGates.remove(gate);
+							JPanel.validate();
+							JPanel.repaint();
+						}
+					});
+					popup.add(menuItem);
+					popup.show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+
 		});
 
 		this.addMouseMotionListener(new MouseMotionAdapter() {

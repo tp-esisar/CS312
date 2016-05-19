@@ -1,10 +1,22 @@
 package ihm;
 
+import gates.LogicGate;
+import gates.and;
+import gates.button;
+import gates.gate;
+import gates.led;
+import gates.nand;
+import gates.nor;
+import gates.not;
+import gates.or;
+import gates.xor;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -21,19 +33,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import gates.LogicGate;
-import gates.and;
-import gates.button;
-import gates.gate;
-import gates.led;
-import gates.nand;
-import gates.nor;
-import gates.not;
-import gates.or;
-import gates.xor;
-
 /**
- * Cette classe repr�sente la fen�tre principale de l'interface graphique
+ * Cette classe représente la fenétre principale de l'interface graphique
  * 
  * Elle contient le menu et le conteneur de dessin
  * 
@@ -53,7 +54,7 @@ public class CircuitLogiqueJFrame extends JFrame {
 	private LogicGateSimulatorJPanel lgsPanel = new LogicGateSimulatorJPanel();
 
 	/**
-	 * Initialise la fen�tre principale
+	 * Initialise la fenétre principale
 	 */
 	public CircuitLogiqueJFrame() {
 
@@ -72,7 +73,7 @@ public class CircuitLogiqueJFrame extends JFrame {
 	}
 
 	/**
-	 * Cr�ation du toolbar
+	 * Création du toolbar
 	 */
 	private void createToolBar() {
 
@@ -90,11 +91,11 @@ public class CircuitLogiqueJFrame extends JFrame {
 		JButton buttonValidate = new JButton(iconValidate);
 		JButton buttonSimulate = new JButton(iconSimulate);
 
-		buttonNew.setToolTipText("Cr�er un nouveau circuit logique");
+		buttonNew.setToolTipText("Créer un nouveau circuit logique");
 		buttonLoad.setToolTipText("Charger un fichier (*.boole) contenant un circuit logique");
 		buttonSave.setToolTipText("Sauvegarder un circuit logique dans un fichier (*.boole)");
-		buttonValidate.setToolTipText("V�rifier si un circuit logique est ferm�");
-		buttonSimulate.setToolTipText("Simuler le r�sultat d'un circuit logique");
+		buttonValidate.setToolTipText("Vérifier si un circuit logique est fermé");
+		buttonSimulate.setToolTipText("Simuler le résultat d'un circuit logique");
 
 		toolbar.add(buttonNew);
 		toolbar.add(buttonLoad);
@@ -144,12 +145,12 @@ public class CircuitLogiqueJFrame extends JFrame {
 				for (gate g : LogicOperatorJPanel.lGates) {
 					if (g instanceof gates.led) {
 						if (((led) g).ValiderCircuitFerme()) {
-							JOptionPane.showMessageDialog(null, "Le circcuit est bien ferm�",
-									"InfoBox: " + "Circuit Ferm�", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Le circcuit est bien fermé",
+									"InfoBox: " + "Circuit Fermé", JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							JOptionPane.showMessageDialog(null,
-									"Le circcuit n'est pas ferm�. Merci de connecter toutes les entr�es sorties",
-									"InfoBox: " + "Circuit Non Ferm�", JOptionPane.WARNING_MESSAGE);
+									"Le circcuit n'est pas fermé. Merci de connecter toutes les entrées sorties",
+									"InfoBox: " + "Circuit Non Fermé", JOptionPane.WARNING_MESSAGE);
 						}
 						return;
 					}
@@ -181,7 +182,8 @@ public class CircuitLogiqueJFrame extends JFrame {
 									jaxbMarshaller.marshal(g, file);
 									jaxbMarshaller.marshal(g, System.out);
 								}
-							} catch (JAXBException ex) {
+							}							
+							catch (JAXBException ex) {
 								ex.printStackTrace();
 							}
 						}
@@ -210,8 +212,10 @@ public class CircuitLogiqueJFrame extends JFrame {
 						contentPane.add(lgsPanel, BorderLayout.CENTER);
 						contentPane.validate();
 						contentPane.repaint();
-					} catch (JAXBException ex) {
-						ex.printStackTrace();
+					} 
+						catch (JAXBException ex) {
+							JOptionPane.showMessageDialog(null, "Erreur lors du chargement du fichier",
+									"Fichier Inexistant", JOptionPane.ERROR_MESSAGE);
 					}
 				}
 
