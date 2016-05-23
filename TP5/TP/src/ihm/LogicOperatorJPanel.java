@@ -421,7 +421,6 @@ public class LogicOperatorJPanel extends JPanel {
 	}
 
 	public void SimulateCircuit(boolean simulatedValue) {
-		System.out.println(simulatedValue);
 		((JToggleButton) gateImage).setSelected(simulatedValue);
 	}
 }

@@ -119,7 +119,7 @@ public class CircuitLogiqueJFrame extends JFrame {
 								LogicOperatorJPanel operateur = (LogicOperatorJPanel) cp;
 								if (operateur.gate.logicGate == LogicGate.LED) {
 									operateur.SimulateCircuit(simulatedValue);
-									break;
+									//break;
 								}
 							}
 						}
@@ -187,9 +187,12 @@ public class CircuitLogiqueJFrame extends JFrame {
 								ex.printStackTrace();
 							}
 						}
+						else 
+							JOptionPane.showMessageDialog(null, "Le circuit n'est pas fermé !", "Impossible d'enregistrer le fichier", JOptionPane.WARNING_MESSAGE);
 						return;
 					}
 				}
+				JOptionPane.showMessageDialog(null, "Il n'y a pas de led !", "Impossible d'enregistrer le fichier", JOptionPane.WARNING_MESSAGE);
 			}
 		});
 		buttonLoad.addActionListener(new ActionListener() {
